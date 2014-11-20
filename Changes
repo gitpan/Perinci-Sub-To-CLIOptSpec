@@ -1,5 +1,13 @@
 Revision history for Perinci-Sub-To-CLIOptSpec
 
+0.02    2014-11-20 (PERLANCAR)
+
+	- Add arg_spec for each opt (to show e.g. values of 'in' clause
+	  from schema, etc).
+
+	- Add 'default' for each opt.
+
+
 0.01     2014-11-20 (PERLANCAR)
 
          - First release. This is part of an effort to refactor Perinci-To-Doc.
