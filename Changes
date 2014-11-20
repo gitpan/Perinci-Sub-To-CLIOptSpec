@@ -1,5 +1,15 @@
 Revision history for Perinci-Sub-To-CLIOptSpec
 
+0.03    2014-11-20 (PERLANCAR)
+
+        - Accept and pass per_arg_json & per_arg_yaml arguments to
+          Perinci::Sub::Args::Argv.
+
+        - Add arg/fqarg/is_base64/is_json/is_yaml to each opt
+
+        - [ux] Don't add required mark '*' for base64/json/yaml version.
+
+
 0.02    2014-11-20 (PERLANCAR)
 
 	- Add arg_spec for each opt (to show e.g. values of 'in' clause

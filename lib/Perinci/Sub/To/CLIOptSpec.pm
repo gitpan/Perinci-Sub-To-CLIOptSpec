@@ -1,7 +1,7 @@
 package Perinci::Sub::To::CLIOptSpec;
 
 our $DATE = '2014-11-20'; # DATE
-our $VERSION = '0.02'; # VERSION
+our $VERSION = '0.03'; # VERSION
 
 use 5.010001;
 use strict;
@@ -42,11 +42,12 @@ sub _dash_prefix {
 
 sub _fmt_opt {
     my $spec = shift;
-    my @parsed = @_;
+    my @ospecs = @_;
     my @res;
     my $i = 0;
-    for my $parsed (@parsed) {
+    for my $ospec (@ospecs) {
         my $j = 0;
+        my $parsed = $ospec->{parsed};
         for (@{ $parsed->{opts} }) {
             my $opt = _dash_prefix($_);
             if ($i==0 && $j==0) {
@@ -58,7 +59,8 @@ sub _fmt_opt {
                     }
                 }
                 # mark required option with a '*'
-                $opt .= "*" if $spec->{req};
+                $opt .= "*" if $spec->{req} && !$ospec->{is_base64} &&
+                    !$ospec->{is_json} && !$ospec->{is_yaml};
             }
             push @res, $opt;
             $j++;
@@ -107,6 +109,14 @@ extra result in result metadata (`func.*` keys in `$res->[3]` hash).
 
 _
         },
+        per_arg_json => {
+            schema => 'bool',
+            summary => 'Pass per_arg_json=1 to Perinci::Sub::GetArgs::Argv',
+        },
+        per_arg_yaml => {
+            schema => 'bool',
+            summary => 'Pass per_arg_json=1 to Perinci::Sub::GetArgs::Argv',
+        },
         lang => {
             schema => 'str*',
         },
@@ -129,6 +139,8 @@ sub gen_cli_opt_spec_from_meta {
         require Perinci::Sub::GetArgs::Argv;
         Perinci::Sub::GetArgs::Argv::gen_getopt_long_spec_from_meta(
             meta=>$meta, meta_is_normalized=>1, common_opts=>$common_opts,
+            per_arg_json => $args{per_arg_json},
+            per_arg_yaml => $args{per_arg_yaml},
         );
     };
     $ggls_res->[0] == 200 or return $ggls_res;
@@ -207,7 +219,7 @@ sub gen_cli_opt_spec_from_meta {
                 my $arg_spec = $args_prop->{ $ospec->{arg} };
                 my $alias_spec = $arg_spec->{cmdline_aliases}{$ospec->{alias}};
                 my $rimeta = rimeta($alias_spec);
-                $ok = _fmt_opt($arg_spec, $ospec->{parsed});
+                $ok = _fmt_opt($arg_spec, $ospec);
                 my $opt = {
                     arg_spec => $arg_spec,
                     is_alias => 1,
@@ -261,14 +273,20 @@ sub gen_cli_opt_spec_from_meta {
                     my $aospec = $ospecs->{ $k_aliases[$j] };
                     {
                         last unless $aospec->{arg} eq $ospec->{arg};
-                        push @aliases, $aospec->{parsed};
+                        push @aliases, $aospec;
                         splice @k_aliases, $j, 1;
                     }
                     $j--;
                 }
 
-                $ok = _fmt_opt($arg_spec, $ospec->{parsed}, @aliases);
+                $ok = _fmt_opt($arg_spec, $ospec, @aliases);
 
+                # include keys from func.specmeta
+                for (qw/arg fqarg is_base64 is_json is_yaml/) {
+                    $opt->{$_} = $ospec->{$_} if defined $ospec->{$_};
+                }
+
+                # include keys from arg_spec
                 for (qw/req pos greedy is_password/) {
                     $opt->{$_} = $arg_spec->{$_} if defined $arg_spec->{$_};
                 }
@@ -276,7 +294,7 @@ sub gen_cli_opt_spec_from_meta {
                 $opts{$ok} = $opt;
             } else {
                 # option from common_opts
-                $ok = _fmt_opt($common_opts, $ospec->{parsed});
+                $ok = _fmt_opt($common_opts, $ospec);
                 my $rimeta = rimeta($common_opts->{$ospec->{common_opt}});
                 $opts{$ok} = {
                     category => "Common options", # XXX translatable?
@@ -307,7 +325,7 @@ Perinci::Sub::To::CLIOptSpec - Generate data structure convenient for producing 
 
 =head1 VERSION
 
-This document describes version 0.02 of Perinci::Sub::To::CLIOptSpec (from Perl distribution Perinci-Sub-To-CLIOptSpec), released on 2014-11-20.
+This document describes version 0.03 of Perinci::Sub::To::CLIOptSpec (from Perl distribution Perinci-Sub-To-CLIOptSpec), released on 2014-11-20.
 
 =head1 SYNOPSIS
 
@@ -350,6 +368,14 @@ extra result in result metadata (C<func.*> keys in C<< $res-E<gt>[3] >> hash).
 =item * B<meta>* => I<hash>
 
 =item * B<meta_is_normalized> => I<bool>
+
+=item * B<per_arg_json> => I<bool>
+
+Pass per_arg_json=1 to Perinci::Sub::GetArgs::Argv.
+
+=item * B<per_arg_yaml> => I<bool>
+
+Pass per_arg_json=1 to Perinci::Sub::GetArgs::Argv.
 
 =back
 

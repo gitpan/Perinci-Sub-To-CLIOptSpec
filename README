@@ -3,7 +3,7 @@ NAME
     producing CLI help/usage
 
 VERSION
-    This document describes version 0.02 of Perinci::Sub::To::CLIOptSpec
+    This document describes version 0.03 of Perinci::Sub::To::CLIOptSpec
     (from Perl distribution Perinci-Sub-To-CLIOptSpec), released on
     2014-11-20.
 
@@ -44,6 +44,14 @@ FUNCTIONS
     *   meta* => *hash*
 
     *   meta_is_normalized => *bool*
+
+    *   per_arg_json => *bool*
+
+        Pass per_arg_json=1 to Perinci::Sub::GetArgs::Argv.
+
+    *   per_arg_yaml => *bool*
+
+        Pass per_arg_json=1 to Perinci::Sub::GetArgs::Argv.
 
     Return value:
 
