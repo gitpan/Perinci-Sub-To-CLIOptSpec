@@ -1,0 +1,7 @@
+Revision history for Perinci-Sub-To-CLIOptSpec
+
+0.01     2014-11-20 (PERLANCAR)
+
+         - First release. This is part of an effort to refactor Perinci-To-Doc.
+           This distribution is separated so it can have minimal dependencies
+           (e.g. to be used by Perinci-CmdLine-Lite).

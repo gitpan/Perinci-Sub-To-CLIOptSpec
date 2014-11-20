@@ -1,0 +1,90 @@
+NAME
+    Perinci::Sub::To::CLIOptSpec - Generate data structure convenient for
+    producing CLI help/usage
+
+VERSION
+    This document describes version 0.01 of Perinci::Sub::To::CLIOptSpec
+    (from Perl distribution Perinci-Sub-To-CLIOptSpec), released on
+    2014-11-20.
+
+SYNOPSIS
+     use Perinci::Sub::To::CLIOptSpec qw(gen_cli_opt_spec_from_meta);
+     my $cliospec = gen_cli_opt_spec_from_meta(meta => $meta);
+
+FUNCTIONS
+  gen_cli_opt_spec_from_meta(%args) -> [status, msg, result, meta]
+    From Rinci function metadata, generate structure convenient for
+    producing CLI help/usage.
+
+    This function calls "Perinci::Sub::GetArgs::Argv"'s
+    "gen_getopt_long_spec_from_meta()" (or receive it, if passed, to avoid
+    calculating twice) and post-processes it: produce command usage line,
+    format the options, include information from metadata, group the options
+    by category. The resulting data structure is convenient to use when one
+    produces a help message for a command-line program.
+
+    Arguments ('*' denotes required arguments):
+
+    *   common_opts => *hash*
+
+        Will be passed to gen_getopt_long_spec_from_meta().
+
+    *   ggls_res => *array*
+
+        Full result from gen_getopt_long_spec_from_meta().
+
+        If you already call "Perinci::Sub::GetArgs::Argv"'s
+        "gen_getopt_long_spec_from_meta()", you can pass the *full*
+        enveloped result here, to avoid calculating twice. What will be
+        useful for the function is the extra result in result metadata
+        ("func.*" keys in "$res->[3]" hash).
+
+    *   lang => *str*
+
+    *   meta* => *hash*
+
+    *   meta_is_normalized => *bool*
+
+    Return value:
+
+    Returns an enveloped result (an array).
+
+    First element (status) is an integer containing HTTP status code (200
+    means OK, 4xx caller error, 5xx function error). Second element (msg) is
+    a string containing error message, or 'OK' if status is 200. Third
+    element (result) is optional, the actual result. Fourth element (meta)
+    is called result metadata and is optional, a hash that contains extra
+    information.
+
+     (hash)
+
+SEE ALSO
+    Perinci::CmdLine, Perinci::CmdLine::Lite
+
+    Pod::Weaver::Plugin::Rinci
+
+HOMEPAGE
+    Please visit the project's homepage at
+    <https://metacpan.org/release/Perinci-Sub-To-CLIOptSpec>.
+
+SOURCE
+    Source repository is at
+    <https://github.com/perlancar/perl-Perinci-Sub-To-CLIOptSpec>.
+
+BUGS
+    Please report any bugs or feature requests on the bugtracker website
+    <https://rt.cpan.org/Public/Dist/Display.html?Name=Perinci-Sub-To-CLIOpt
+    Spec>
+
+    When submitting a bug or request, please include a test-file or a patch
+    to an existing test-file that illustrates the bug or desired feature.
+
+AUTHOR
+    perlancar <perlancar@cpan.org>
+
+COPYRIGHT AND LICENSE
+    This software is copyright (c) 2014 by perlancar@cpan.org.
+
+    This is free software; you can redistribute it and/or modify it under
+    the same terms as the Perl 5 programming language system itself.
+
