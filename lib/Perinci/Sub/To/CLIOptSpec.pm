@@ -1,7 +1,7 @@
 package Perinci::Sub::To::CLIOptSpec;
 
 our $DATE = '2014-11-21'; # DATE
-our $VERSION = '0.04'; # VERSION
+our $VERSION = '0.05'; # VERSION
 
 use 5.010001;
 use strict;
@@ -241,9 +241,7 @@ sub gen_cli_opt_spec_from_meta {
 
                     $arg_spec = $args_prop->{$ospec->{arg}};
                     my $rimeta = rimeta($arg_spec);
-                    my $opt = {};
-
-                    _add_category_from_arg_spec($opt, $arg_spec);
+                    $opt = {};
 
                     # for bool, only display either the positive (e.g. --bool) or
                     # the negative (e.g. --nobool) depending on the default
@@ -299,6 +297,7 @@ sub gen_cli_opt_spec_from_meta {
 
                 _add_category_from_arg_spec($opt, $arg_spec);
                 _add_default_from_arg_spec($opt, $arg_spec);
+
                 $opts{$ok} = $opt;
 
             } else {
@@ -336,7 +335,7 @@ Perinci::Sub::To::CLIOptSpec - Generate data structure convenient for producing 
 
 =head1 VERSION
 
-This document describes version 0.04 of Perinci::Sub::To::CLIOptSpec (from Perl distribution Perinci-Sub-To-CLIOptSpec), released on 2014-11-21.
+This document describes version 0.05 of Perinci::Sub::To::CLIOptSpec (from Perl distribution Perinci-Sub-To-CLIOptSpec), released on 2014-11-21.
 
 =head1 SYNOPSIS
 

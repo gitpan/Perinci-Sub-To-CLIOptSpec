@@ -27,7 +27,7 @@ resources:
   bugtracker: https://rt.cpan.org/Public/Dist/Display.html?Name=Perinci-Sub-To-CLIOptSpec
   homepage: https://metacpan.org/release/Perinci-Sub-To-CLIOptSpec
   repository: git://github.com/perlancar/perl-Perinci-Sub-To-CLIOptSpec.git
-version: '0.04'
+version: '0.05'
 x_Dist_Zilla:
   perl:
     version: '5.018002'
