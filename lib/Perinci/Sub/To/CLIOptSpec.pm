@@ -1,7 +1,7 @@
 package Perinci::Sub::To::CLIOptSpec;
 
 our $DATE = '2014-11-21'; # DATE
-our $VERSION = '0.06'; # VERSION
+our $VERSION = '0.07'; # VERSION
 
 use 5.010001;
 use strict;
@@ -20,7 +20,8 @@ sub _add_category_from_arg_spec {
     my $cat;
     my $raw_cat = '';
     for (@{ $arg_spec->{tags} // [] }) {
-        if (!ref($_) && /^category:(.+)/) {
+        my $tag_name = ref($_) ? $_->{name} : $_;
+        if ($tag_name =~ /^category:(.+)/) {
             $raw_cat = $1;
             $cat = ucfirst($1) . " options";
             last;
@@ -353,7 +354,7 @@ Perinci::Sub::To::CLIOptSpec - Generate data structure convenient for producing 
 
 =head1 VERSION
 
-This document describes version 0.06 of Perinci::Sub::To::CLIOptSpec (from Perl distribution Perinci-Sub-To-CLIOptSpec), released on 2014-11-21.
+This document describes version 0.07 of Perinci::Sub::To::CLIOptSpec (from Perl distribution Perinci-Sub-To-CLIOptSpec), released on 2014-11-21.
 
 =head1 SYNOPSIS
 
