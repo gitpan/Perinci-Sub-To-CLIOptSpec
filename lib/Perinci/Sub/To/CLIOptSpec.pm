@@ -1,7 +1,7 @@
 package Perinci::Sub::To::CLIOptSpec;
 
 our $DATE = '2014-11-21'; # DATE
-our $VERSION = '0.05'; # VERSION
+our $VERSION = '0.06'; # VERSION
 
 use 5.010001;
 use strict;
@@ -314,6 +314,24 @@ sub gen_cli_opt_spec_from_meta {
 
             }
         }
+
+        # link ungrouped alias to its main opt
+      OPT1:
+        for my $k (keys %opts) {
+            my $opt = $opts{$k};
+            next unless $opt->{is_alias} || $opt->{is_base64} ||
+                $opt->{is_json} || $opt->{is_yaml};
+            for my $k2 (keys %opts) {
+                my $arg_opt = $opts{$k2};
+                next if $arg_opt->{is_alias} || $arg_opt->{is_base64} ||
+                    $arg_opt->{is_json} || $arg_opt->{is_yaml};
+                next unless defined($arg_opt->{arg}) &&
+                    $arg_opt->{arg} eq $opt->{arg};
+                $opt->{main_opt} = $k2;
+                next OPT1;
+            }
+        }
+
     }
     $cliospec->{opts} = \%opts;
 
@@ -335,7 +353,7 @@ Perinci::Sub::To::CLIOptSpec - Generate data structure convenient for producing 
 
 =head1 VERSION
 
-This document describes version 0.05 of Perinci::Sub::To::CLIOptSpec (from Perl distribution Perinci-Sub-To-CLIOptSpec), released on 2014-11-21.
+This document describes version 0.06 of Perinci::Sub::To::CLIOptSpec (from Perl distribution Perinci-Sub-To-CLIOptSpec), released on 2014-11-21.
 
 =head1 SYNOPSIS
 

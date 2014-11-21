@@ -1,5 +1,11 @@
 Revision history for Perinci-Sub-To-CLIOptSpec
 
+0.06    2014-11-21 (PERLANCAR)
+
+        - Add 'main_opt' in alias/base64/json/yaml options to be able to link
+          back to its main/canonical option.
+
+
 0.05    2014-11-21 (PERLANCAR)
 
         - No functional changes.
