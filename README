@@ -3,9 +3,9 @@ NAME
     producing CLI help/usage
 
 VERSION
-    This document describes version 0.03 of Perinci::Sub::To::CLIOptSpec
+    This document describes version 0.04 of Perinci::Sub::To::CLIOptSpec
     (from Perl distribution Perinci-Sub-To-CLIOptSpec), released on
-    2014-11-20.
+    2014-11-21.
 
 SYNOPSIS
      use Perinci::Sub::To::CLIOptSpec qw(gen_cli_opt_spec_from_meta);

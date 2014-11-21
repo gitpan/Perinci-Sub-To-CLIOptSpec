@@ -27,7 +27,7 @@ resources:
   bugtracker: https://rt.cpan.org/Public/Dist/Display.html?Name=Perinci-Sub-To-CLIOptSpec
   homepage: https://metacpan.org/release/Perinci-Sub-To-CLIOptSpec
   repository: git://github.com/perlancar/perl-Perinci-Sub-To-CLIOptSpec.git
-version: '0.03'
+version: '0.04'
 x_Dist_Zilla:
   perl:
     version: '5.018002'
@@ -172,8 +172,8 @@ x_Dist_Zilla:
               name: FUNCTIONS
               version: '4.006'
             -
-              class: Pod::Weaver::Plugin::Perinci
-              name: '@Author::PERLANCAR/Perinci'
+              class: Pod::Weaver::Plugin::Rinci
+              name: '@Author::PERLANCAR/Rinci'
               version: '0.15'
             -
               class: Pod::Weaver::Section::Leftovers

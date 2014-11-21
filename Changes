@@ -1,5 +1,13 @@
 Revision history for Perinci-Sub-To-CLIOptSpec
 
+0.04    2014-11-21 (PERLANCAR)
+
+        - Add more information to CLI option spec: each option now include
+          arg/fqarg/arg_spec/links/tags/raw_category.
+
+        - A couple of minor fixes.
+
+
 0.03    2014-11-20 (PERLANCAR)
 
         - Accept and pass per_arg_json & per_arg_yaml arguments to

@@ -58,7 +58,7 @@
          "web" : "https://github.com/perlancar/perl-Perinci-Sub-To-CLIOptSpec"
       }
    },
-   "version" : "0.03",
+   "version" : "0.04",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.018002"
@@ -239,8 +239,8 @@
                         "version" : "4.006"
                      },
                      {
-                        "class" : "Pod::Weaver::Plugin::Perinci",
-                        "name" : "@Author::PERLANCAR/Perinci",
+                        "class" : "Pod::Weaver::Plugin::Rinci",
+                        "name" : "@Author::PERLANCAR/Rinci",
                         "version" : "0.15"
                      },
                      {
