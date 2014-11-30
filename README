@@ -3,9 +3,9 @@ NAME
     producing CLI help/usage
 
 VERSION
-    This document describes version 0.07 of Perinci::Sub::To::CLIOptSpec
+    This document describes version 0.08 of Perinci::Sub::To::CLIOptSpec
     (from Perl distribution Perinci-Sub-To-CLIOptSpec), released on
-    2014-11-21.
+    2014-11-30.
 
 SYNOPSIS
      use Perinci::Sub::To::CLIOptSpec qw(gen_cli_opt_spec_from_meta);
@@ -17,11 +17,12 @@ FUNCTIONS
     producing CLI help/usage.
 
     This function calls "Perinci::Sub::GetArgs::Argv"'s
-    "gen_getopt_long_spec_from_meta()" (or receive it, if passed, to avoid
-    calculating twice) and post-processes it: produce command usage line,
-    format the options, include information from metadata, group the options
-    by category. The resulting data structure is convenient to use when one
-    produces a help message for a command-line program.
+    "gen_getopt_long_spec_from_meta()" (or receive its result as an
+    argument, if passed, to avoid calling the function twice) and
+    post-processes it: produce command usage line, format the options,
+    include information from metadata, group the options by category. The
+    resulting data structure is convenient to use when one produces a help
+    message for a command-line program.
 
     Arguments ('*' denotes required arguments):
 

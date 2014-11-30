@@ -1,7 +1,7 @@
 package Perinci::Sub::To::CLIOptSpec;
 
-our $DATE = '2014-11-21'; # DATE
-our $VERSION = '0.07'; # VERSION
+our $DATE = '2014-11-30'; # DATE
+our $VERSION = '0.08'; # VERSION
 
 use 5.010001;
 use strict;
@@ -82,11 +82,11 @@ $SPEC{gen_cli_opt_spec_from_meta} = {
     description => <<'_',
 
 This function calls `Perinci::Sub::GetArgs::Argv`'s
-`gen_getopt_long_spec_from_meta()` (or receive it, if passed, to avoid
-calculating twice) and post-processes it: produce command usage line, format the
-options, include information from metadata, group the options by category. The
-resulting data structure is convenient to use when one produces a help message
-for a command-line program.
+`gen_getopt_long_spec_from_meta()` (or receive its result as an argument, if
+passed, to avoid calling the function twice) and post-processes it: produce
+command usage line, format the options, include information from metadata, group
+the options by category. The resulting data structure is convenient to use when
+one produces a help message for a command-line program.
 
 _
     args => {
@@ -230,6 +230,7 @@ sub gen_cli_opt_spec_from_meta {
                     my $rimeta = rimeta($alias_spec);
                     $ok = _fmt_opt($arg_spec, $ospec);
                     $opt = {
+                        orig_opt => $k,
                         is_alias => 1,
                         alias_for => $ospec->{alias_for},
                         summary => $rimeta->langprop({lang=>$lang}, 'summary') //
@@ -242,7 +243,9 @@ sub gen_cli_opt_spec_from_meta {
 
                     $arg_spec = $args_prop->{$ospec->{arg}};
                     my $rimeta = rimeta($arg_spec);
-                    $opt = {};
+                    $opt = {
+                        orig_opt => $k,
+                    };
 
                     # for bool, only display either the positive (e.g. --bool) or
                     # the negative (e.g. --nobool) depending on the default
@@ -307,6 +310,7 @@ sub gen_cli_opt_spec_from_meta {
                 $ok = _fmt_opt($common_opts, $ospec);
                 my $rimeta = rimeta($common_opts->{$ospec->{common_opt}});
                 $opts{$ok} = {
+                    orig_opt => $k,
                     category => "Common options", # XXX translatable?
                     summary => $rimeta->langprop({lang=>$lang}, 'summary'),
                     description =>
@@ -354,7 +358,7 @@ Perinci::Sub::To::CLIOptSpec - Generate data structure convenient for producing 
 
 =head1 VERSION
 
-This document describes version 0.07 of Perinci::Sub::To::CLIOptSpec (from Perl distribution Perinci-Sub-To-CLIOptSpec), released on 2014-11-21.
+This document describes version 0.08 of Perinci::Sub::To::CLIOptSpec (from Perl distribution Perinci-Sub-To-CLIOptSpec), released on 2014-11-30.
 
 =head1 SYNOPSIS
 
@@ -369,11 +373,11 @@ This document describes version 0.07 of Perinci::Sub::To::CLIOptSpec (from Perl 
 From Rinci function metadata, generate structure convenient for producing CLI help/usage.
 
 This function calls C<Perinci::Sub::GetArgs::Argv>'s
-C<gen_getopt_long_spec_from_meta()> (or receive it, if passed, to avoid
-calculating twice) and post-processes it: produce command usage line, format the
-options, include information from metadata, group the options by category. The
-resulting data structure is convenient to use when one produces a help message
-for a command-line program.
+C<gen_getopt_long_spec_from_meta()> (or receive its result as an argument, if
+passed, to avoid calling the function twice) and post-processes it: produce
+command usage line, format the options, include information from metadata, group
+the options by category. The resulting data structure is convenient to use when
+one produces a help message for a command-line program.
 
 Arguments ('*' denotes required arguments):
 
