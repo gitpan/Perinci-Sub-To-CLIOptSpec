@@ -1,7 +1,7 @@
 package Perinci::Sub::To::CLIOptSpec;
 
-our $DATE = '2014-11-30'; # DATE
-our $VERSION = '0.08'; # VERSION
+our $DATE = '2014-12-02'; # DATE
+our $VERSION = '0.09'; # VERSION
 
 use 5.010001;
 use strict;
@@ -230,6 +230,7 @@ sub gen_cli_opt_spec_from_meta {
                     my $rimeta = rimeta($alias_spec);
                     $ok = _fmt_opt($arg_spec, $ospec);
                     $opt = {
+                        opt_parsed => $ospec->{parsed},
                         orig_opt => $k,
                         is_alias => 1,
                         alias_for => $ospec->{alias_for},
@@ -244,6 +245,7 @@ sub gen_cli_opt_spec_from_meta {
                     $arg_spec = $args_prop->{$ospec->{arg}};
                     my $rimeta = rimeta($arg_spec);
                     $opt = {
+                        opt_parsed => $ospec->{parsed},
                         orig_opt => $k,
                     };
 
@@ -310,6 +312,7 @@ sub gen_cli_opt_spec_from_meta {
                 $ok = _fmt_opt($common_opts, $ospec);
                 my $rimeta = rimeta($common_opts->{$ospec->{common_opt}});
                 $opts{$ok} = {
+                    opt_parsed => $ospec->{parsed},
                     orig_opt => $k,
                     category => "Common options", # XXX translatable?
                     summary => $rimeta->langprop({lang=>$lang}, 'summary'),
@@ -358,7 +361,7 @@ Perinci::Sub::To::CLIOptSpec - Generate data structure convenient for producing 
 
 =head1 VERSION
 
-This document describes version 0.08 of Perinci::Sub::To::CLIOptSpec (from Perl distribution Perinci-Sub-To-CLIOptSpec), released on 2014-11-30.
+This document describes version 0.09 of Perinci::Sub::To::CLIOptSpec (from Perl distribution Perinci-Sub-To-CLIOptSpec), released on 2014-12-02.
 
 =head1 SYNOPSIS
 
