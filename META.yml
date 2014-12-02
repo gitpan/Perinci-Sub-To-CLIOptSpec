@@ -18,6 +18,7 @@ meta-spec:
   version: '1.4'
 name: Perinci-Sub-To-CLIOptSpec
 requires:
+  DefHash: v1.0.8
   Perinci::Object: '0'
   Perinci::Sub::GetArgs::Argv: '0.59'
   Perinci::Sub::Normalize: '0'
@@ -27,7 +28,7 @@ resources:
   bugtracker: https://rt.cpan.org/Public/Dist/Display.html?Name=Perinci-Sub-To-CLIOptSpec
   homepage: https://metacpan.org/release/Perinci-Sub-To-CLIOptSpec
   repository: git://github.com/perlancar/perl-Perinci-Sub-To-CLIOptSpec.git
-version: '0.09'
+version: '0.10'
 x_Dist_Zilla:
   perl:
     version: '5.018001'

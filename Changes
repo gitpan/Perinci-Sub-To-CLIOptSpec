@@ -1,5 +1,16 @@
 Revision history for Perinci-Sub-To-CLIOptSpec
 
+0.10    2014-12-02 (PERLANCAR)
+
+	- [ux] For --array-of-str option, show singular summary
+          (summary.alt.numnoun.singular) if available.
+
+        [INCOMPATIBLE CHANGES]
+
+        - Change searching negative summary from in 'summary.alt.neg' to
+          'summary.alt.bool.not' to comply to DefHash 1.0.8.
+
+
 0.09    2014-12-02 (PERLANCAR)
 
 	- Add 'opt_parsed' key for each opt.

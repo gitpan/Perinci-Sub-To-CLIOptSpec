@@ -21,6 +21,7 @@ my %WriteMakefileArgs = (
   "LICENSE" => "perl",
   "NAME" => "Perinci::Sub::To::CLIOptSpec",
   "PREREQ_PM" => {
+    "DefHash" => "v1.0.8",
     "Perinci::Object" => 0,
     "Perinci::Sub::GetArgs::Argv" => "0.59",
     "Perinci::Sub::Normalize" => 0,
@@ -33,7 +34,7 @@ my %WriteMakefileArgs = (
     "Perinci::Examples::CLI" => "0.42",
     "Test::More" => 0
   },
-  "VERSION" => "0.09",
+  "VERSION" => "0.10",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -41,6 +42,7 @@ my %WriteMakefileArgs = (
 
 
 my %FallbackPrereqs = (
+  "DefHash" => "v1.0.8",
   "File::Spec" => 0,
   "IO::Handle" => 0,
   "IPC::Open3" => 0,

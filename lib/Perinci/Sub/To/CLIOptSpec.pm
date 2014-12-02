@@ -1,7 +1,7 @@
 package Perinci::Sub::To::CLIOptSpec;
 
 our $DATE = '2014-12-02'; # DATE
-our $VERSION = '0.09'; # VERSION
+our $VERSION = '0.10'; # VERSION
 
 use 5.010001;
 use strict;
@@ -262,10 +262,17 @@ sub gen_cli_opt_spec_from_meta {
                     }
 
                     if ($ospec->{is_neg}) {
-                        # for negative option, use summary.alt.neg instead of
-                        # summary
+                        # for negative option, use negative summary instead of
+                        # regular (positive sentence) summary
                         $opt->{summary} =
-                            $rimeta->langprop({lang=>$lang}, 'summary.alt.neg');
+                            $rimeta->langprop({lang=>$lang}, 'summary.alt.bool.not');
+                    } elsif ($ospec->{parsed}{type} eq 's@') {
+                        # for array of string that can be specified via multiple
+                        # --opt, show singular version of summary if available.
+                        # otherwise show regular summary.
+                        $opt->{summary} =
+                            $rimeta->langprop({lang=>$lang}, 'summary.alt.numnoun.singular') //
+                                $rimeta->langprop({lang=>$lang}, 'summary');
                     } else {
                         $opt->{summary} =
                             $rimeta->langprop({lang=>$lang}, 'summary');
@@ -361,7 +368,7 @@ Perinci::Sub::To::CLIOptSpec - Generate data structure convenient for producing 
 
 =head1 VERSION
 
-This document describes version 0.09 of Perinci::Sub::To::CLIOptSpec (from Perl distribution Perinci-Sub-To-CLIOptSpec), released on 2014-12-02.
+This document describes version 0.10 of Perinci::Sub::To::CLIOptSpec (from Perl distribution Perinci-Sub-To-CLIOptSpec), released on 2014-12-02.
 
 =head1 SYNOPSIS
 

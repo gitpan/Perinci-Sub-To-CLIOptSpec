@@ -3,7 +3,7 @@ NAME
     producing CLI help/usage
 
 VERSION
-    This document describes version 0.09 of Perinci::Sub::To::CLIOptSpec
+    This document describes version 0.10 of Perinci::Sub::To::CLIOptSpec
     (from Perl distribution Perinci-Sub-To-CLIOptSpec), released on
     2014-12-02.
 
